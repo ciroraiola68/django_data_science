@@ -3,10 +3,29 @@
 {% block title %}Performance{% endblock title %}
 
 {% block content %}
+
+    <div class="ui modal mymodal">
+        <div class="header"><h1>Price Data</h1></div>
+        <div class="ui content">
+            <ul>
+                <li><strong>Count: </strong>{{ price.count }}</li>
+                <li><strong>Mean: </strong>{{ price.mean }}</li>
+                <li><strong>Median: </strong>{{ price.median }}</li>
+                <li><strong>Min: </strong>{{ price.min }}</li>
+                <li><strong>Max: </strong>{{ price.max }}</li>
+                <li><strong>Standard Deviation: </strong>{{ price.std|floatformat }}</li>
+            </ul>
+        </div>
+    </div>
     
     <div>
         {% if error_message %}
-            {{ error_message }}
+            <div class="ui negative message">
+                <i class="close icon"></i>
+                <div class="header">
+                    {{ error_message }}
+                </div>
+            </div>
         {% endif %}
 
         {% if request.POST %}
@@ -42,7 +61,16 @@
                     </div>
                 </div>
             </div>
-            <button class="ui primary button" type="submit">Select</button>
+            <div class="block-center">
+                <button class="ui primary button" type="submit">Select</button>
+            </div>
         </form>
+        <div class="block-center">
+            <button class="ui secondary button" id="modal-btn">See Summary</button>
+            <br>
+            <a href="{% url 'products:add-purchase-view' %}"><button class="ui positive button">Add a record</button></a>
+        </div>
+        
+        
     </div>
 {% endblock content %}
